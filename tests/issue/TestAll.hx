@@ -23,7 +23,9 @@ class TestAll
 		runner.addCase(new TestIssue156());
 		runner.addCase(new TestIssue159());
 		runner.addCase(new TestIssue160());
+#if php
 		runner.addCase(new TestIssueML20100609());
+#end
 	}
 	
 	public static function main()

@@ -23,6 +23,8 @@ class PlainTextReport implements IReport<PlainTextReport> {
 	var newline : String;
 	var indent : String;
 	public function new(runner : Runner, ?outputHandler : PlainTextReport -> Void) {
+		newline = "\n";
+		indent = "  ";
 		aggregator = new ResultAggregator(runner, true);
 		runner.onStart.add(start);
 		aggregator.onComplete.add(complete);

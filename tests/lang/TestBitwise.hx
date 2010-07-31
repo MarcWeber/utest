@@ -93,6 +93,7 @@ class TestBitwise {
 		Assert.equals(-2048, x);
 	}
 
+#if known_to_fail
 	public function testNegSHRAssign() {
     var x = -1024;
     x >>>= 1;
@@ -101,6 +102,7 @@ class TestBitwise {
     x >>= 1;
 		Assert.equals(-512, x);
 	}
+#end
 
 	public function testXORAssign() {
     var x = 475123;

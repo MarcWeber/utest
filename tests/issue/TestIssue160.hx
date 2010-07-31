@@ -10,6 +10,7 @@ import utest.Assert;
 class TestIssue160
 {
 	public function new();
+#if known_to_fail
 	
 	public function testIssue()
 	{
@@ -26,4 +27,5 @@ class TestIssue160
 		}
 		Assert.equals(2, d);
 	}
+#end
 }

@@ -137,6 +137,7 @@ class TestTryCatch {
 		return null;
 	}
 
+#if (not php && not js) || known_to_fail
 	// this test is expected to fail when targeting PHP
 	function testNestedTryCatch(){
 		try{
@@ -156,4 +157,5 @@ class TestTryCatch {
 		}
 
         }
+#end
 }

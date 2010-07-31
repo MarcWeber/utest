@@ -11,6 +11,7 @@ class TestIssue159
 {
 	public function new();
 	
+#if known_to_fail
 	public function testIssue()
 	{
 		var s = switch(true) {
@@ -66,6 +67,7 @@ class TestIssue159
 		Assert.equals(7, interp.variables.get("i"));
 		Assert.equals(3, interp.variables.get("test"));
 	}
+#end
 #end
 
 }

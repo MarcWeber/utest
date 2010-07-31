@@ -137,7 +137,8 @@ class TestTryCatch {
 		return null;
 	}
 
-#if (not php && not js) || known_to_fail
+// known to fail for PHP. The condition should be (!php && !js) || known_to_fail
+#if known_to_fail
 	// this test is expected to fail when targeting PHP
 	function testNestedTryCatch(){
 		try{

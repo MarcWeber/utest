@@ -1,0 +1,8 @@
+-cp src
+-cp tests
+-main TestAll
+-debug
+-D js_browser
+--remap neko:js
+--js-namespace HaXeTestNameSpace
+-js Test.js

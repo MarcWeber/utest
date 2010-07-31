@@ -1,0 +1,6 @@
+-cp src
+-cp tests
+-main TestAll
+--php-front Test.php
+--remap neko:php
+-php php

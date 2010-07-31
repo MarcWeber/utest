@@ -1,5 +1,6 @@
 ﻿import utest.Runner;
 import utest.ui.Report;
+import utest.ui.text.PlainTextReport;
 import utest.Assert;
 import utest.TestResult;
 
@@ -45,6 +46,10 @@ class TestAll
 		addTests(runner);
 		
 		Report.create(runner);
+#if js
+		var plainTextResult:String = "replaced by PlainTextReport";
+		new PlainTextReport(runner, function(ptr){ plainTextResult = ptr.getResults(); } );
+#end
 
 		// get test result to determine exit status
 		var r:TestResult = null;
@@ -52,7 +57,21 @@ class TestAll
 
 		runner.run();
 
-		php.Sys.exit(r.allOk() ? 0 : 1);
+		var code = r.allOk() ? 0 : 1;
 
+#if js_spidermonkey
+		// spidermonkey only
+		untyped { quit(code); }
+
+#elseif js_browser
+		var URL = "Server.n";
+		var cnx = haxe.remoting.HttpAsyncConnection.urlConnect(URL);
+		cnx.setErrorHandler( function(err) trace("Error : "+Std.string(err)) );
+		cnx.Server.result.call([r, plainTextResult], function(d:Dynamic){
+			js.Lib.window.close(); // < does not work due to security restrictions :-(
+		});
+#else
+		neko.Sys.exit(code);
+#end
 	}
 }

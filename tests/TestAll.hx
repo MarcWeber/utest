@@ -6,17 +6,18 @@ import utest.TestResult;
 
 // test that PHP doesn't emit warnings
 // this also catches some parse errors
+#if php
 class TestFinal {
 	public function new(){}
 
-	public function testFinal(){
-#if php
+	public function testThatPHPDidntEmitWarnings(){
+		// test that PHP has not emitted any warnings
 		var s:String = untyped __call__("ob_get_clean");
 		Assert.equals("",s);
-#end
 	}
 
 }
+#end
 
 class TestAll
 {
@@ -29,7 +30,9 @@ class TestAll
 		std.TestAll.addTests(runner);
 
 
+#if php
 		runner.addCase(new TestFinal());
+#end
 	}
 	
 	public static function main()
